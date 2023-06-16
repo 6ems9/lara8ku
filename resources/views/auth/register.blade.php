@@ -10,6 +10,12 @@
                     <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
                     <div class="col-lg-7">
                         <div class="p-5">
+                            <div class="alert alert-warning alert-dismissible fade show text-center" role="alert">
+                                <strong>Holy guacamole!</strong> You should.
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
                             </div>

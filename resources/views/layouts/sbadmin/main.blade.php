@@ -20,7 +20,8 @@
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="template/sbadmin/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="{{asset('template/sbadmin/css/sb-admin-2.min.css')}}" rel="stylesheet">
+    @stack('styles')
 
 </head>
 
@@ -74,7 +75,7 @@
     <!-- Logout Modal-->
     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
@@ -94,6 +95,33 @@
         </div>
     </div>
 
+    <!-- Confirm Delete Modal-->
+    <div class="modal fade" id="ConfirmModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title" id="exampleModalLabel">Delete Confirmation</h6>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                {{-- !-- Delete Warning Modal -->  --}}
+                <form action="#" method="POST">
+                    <div class="modal-body">
+                        @csrf
+                        @method('DELETE')
+                        Are you sure you want to delete {{'This Post'}} ?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No, Cancel</button>
+                        <button type="submit" class="btn btn-danger">Yes, Delete</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+
     <!-- Bootstrap core JavaScript-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
         integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
@@ -108,16 +136,9 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="template/sbadmin/js/sb-admin-2.min.js"></script>
+    <script src="{{asset('template/sbadmin/js/sb-admin-2.min.js')}}"></script>
 
-    <!-- Page level plugins -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.bundle.min.js"
-        integrity="sha512-SuxO9djzjML6b9w9/I07IWnLnQhgyYVSpHZx0JV97kGBfTIsUYlWflyuW4ypnvhBrslz1yJ3R+S14fdCWmSmSA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="template/sbadmin/js/demo/chart-area-demo.js"></script>
-    <script src="template/sbadmin/js/demo/chart-pie-demo.js"></script>
+    @stack('scripts')
 
 </body>
 

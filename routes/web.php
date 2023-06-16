@@ -1,7 +1,8 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
-
+use Cviebrock\EloquentSluggable\Services\SlugService;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,3 +21,11 @@ Route::get('/', function () {
 Route::get('/home', function () {
     return view('home');
 })->middleware(['auth', 'verified']);
+
+Route::resource('post', PostController::class)->middleware(['auth', 'verified']);
+Route::get('/blog', [PostController::class, 'blog']);
+
+Route::get('check_slug', function () {
+    $slug = SlugService::createSlug(App\Models\Post::class, 'slug', request('title'));
+    return response()->json(['slug' => $slug]);
+});

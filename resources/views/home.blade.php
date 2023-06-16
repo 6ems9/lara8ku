@@ -324,3 +324,12 @@
     </div>
     <!-- /.container-fluid -->
 @endsection
+@push('scripts')
+    <!-- Page level plugins -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.bundle.min.js"
+        integrity="sha512-SuxO9djzjML6b9w9/I07IWnLnQhgyYVSpHZx0JV97kGBfTIsUYlWflyuW4ypnvhBrslz1yJ3R+S14fdCWmSmSA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- Page level custom scripts -->
+    <script src="{{asset('template/sbadmin/js/demo/chart-area-demo.js')}}"></script>
+    <script src="{{asset('template/sbadmin/js/demo/chart-pie-demo.js')}}"></script>
+@endpush

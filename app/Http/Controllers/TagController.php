@@ -15,7 +15,9 @@ class TagController extends Controller
      */
     public function index()
     {
-        //
+        $tag = Tag::latest()->get();
+        //return $category;
+        return view('tag.tag', compact('tag'));
     }
 
     /**
@@ -36,7 +38,24 @@ class TagController extends Controller
      */
     public function store(StoreTagRequest $request)
     {
-        //
+
+        $idedit = $request->idEdit;
+
+        $validateData = $request->validate([
+            'name' => 'required|min:3|unique:tags',
+        ]);
+
+        if ($idedit !== null) {
+            $result = Tag::where('id', $idedit)->update($validateData);
+        } else {
+            $result = Tag::create($validateData);
+        }
+
+        if ($result) {
+            return response()->json([
+                'status' => 200,
+            ]);
+        }
     }
 
     /**
@@ -45,9 +64,11 @@ class TagController extends Controller
      * @param  \App\Models\Tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function show(Tag $tag)
+    public function show()
     {
-        //
+        return view('tag.datatag', [
+            'tag' => Tag::latest()->get()
+        ]);
     }
 
     /**
@@ -58,7 +79,9 @@ class TagController extends Controller
      */
     public function edit(Tag $tag)
     {
-        //
+        $id = $tag->id;
+        $data = Tag::find($id);
+        return response()->json($data);
     }
 
     /**
@@ -70,7 +93,7 @@ class TagController extends Controller
      */
     public function update(UpdateTagRequest $request, Tag $tag)
     {
-        //
+
     }
 
     /**
@@ -81,6 +104,18 @@ class TagController extends Controller
      */
     public function destroy(Tag $tag)
     {
-        //
+        $id = $tag->id;
+
+        $result = Tag::destroy($id);
+
+        if ($result) {
+            return response()->json([
+                'status' => 200,
+            ]);
+        } else {
+            return response()->json([
+                'status' => 500,
+            ]);
+        }
     }
 }

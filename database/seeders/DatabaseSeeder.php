@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\Sample;
 use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -43,7 +44,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Programming',
             'slug' => 'programming'
         ]);
-        Category::factory(6)->create();
+        Category::factory(7)->create();
 
         // Post
         Post::factory(125)->create();
@@ -56,5 +57,8 @@ class DatabaseSeeder extends Seeder
             $tag = Tag::inRandomOrder()->take(rand(1, 3))->pluck('id');
             $taging->tags()->attach($tag);
         }
+
+        // Sample
+        Sample::factory(20)->create();
     }
 }

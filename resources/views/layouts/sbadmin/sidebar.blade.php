@@ -29,7 +29,8 @@
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>My Post</span></a>
     </li>
-
+    
+    @can('gate_admin')  
     <!-- Divider -->
     <hr class="sidebar-divider my-0">
 
@@ -49,6 +50,7 @@
             <i class="fas fa-tags"></i>
             <span>Tag</span></a>
     </li>
+    @endcan
 
     <hr class="sidebar-divider my-0">
 

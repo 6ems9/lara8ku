@@ -25,6 +25,15 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        // add Gate
+        Gate::define('gate_admin', function () {
+            //return $user->whois_id == '1';
+            return auth()->user()->role->name === 'WebMaster';
+        });
+
+        Gate::define('gate_user', function () {
+            //return $user->whois_id == '1';
+            return auth()->user()->role_id >= '4';
+        });
     }
 }

@@ -33,10 +33,10 @@ Route::get('check_slug', function () {
 Route::resource('post', PostController::class)->middleware(['auth', 'verified']);
 Route::get('/blog', [PostController::class, 'blog']);
 
-Route::resource('category', CategoryController::class)->middleware(['auth', 'verified']);
+Route::resource('category', CategoryController::class)->middleware(['can:gate_admin']);
 Route::post('destroymulti', [CategoryController::class, 'destroymulti']);
 
-Route::resource('tag', TagController::class)->middleware(['auth', 'verified']);
+Route::resource('tag', TagController::class)->middleware(['roleadmin']);
 
-Route::resource('sample', SampleController::class)->middleware(['auth', 'verified']);
+Route::resource('sample', SampleController::class)->middleware(['can:gate_user']);
 Route::post('allposts', [SampleController::class, 'allPosts'])->name('allposts');

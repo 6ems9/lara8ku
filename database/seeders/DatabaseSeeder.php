@@ -60,5 +60,9 @@ class DatabaseSeeder extends Seeder
 
         // Sample
         Sample::factory(20)->create();
+
+        $this->call([
+            RoleSeeder::class,
+        ]);
     }
 }

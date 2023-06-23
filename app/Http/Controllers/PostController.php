@@ -7,6 +7,7 @@ use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Models\Category;
 use App\Models\Tag;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -19,7 +20,12 @@ class PostController extends Controller
      */
     public function index()
     {
-        $post = Post::latest()->get();
+
+        if (!Gate::allows('gate_user')) {
+            $post = Post::latest()->get();
+        }else{
+            $post = Post::where('user_id', auth()->user()->id)->latest()->get();
+        }
         //return $post;
         return view('post.post', compact('post'));
     }
@@ -108,6 +114,9 @@ class PostController extends Controller
     public function edit(Post $post)
     {
 
+        if (!Gate::allows('gate_admin')) {
+            $this->authorize('view', $post);
+        }
         foreach ($post->tags as $posttags) {
             $taging[] = $posttags->id;
         }
@@ -128,6 +137,7 @@ class PostController extends Controller
      */
     public function update(UpdatePostRequest $request, Post $post)
     {
+        $this->authorize('view', $post);
         $rules = [
             'title' => 'required|max:255',
             // 'slug' => 'required|unique:posts',
@@ -189,6 +199,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        $this->authorize('view', $post);
         if ($post->image) {
             Storage::delete($post->image);
         }
